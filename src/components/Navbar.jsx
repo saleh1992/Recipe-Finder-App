@@ -17,37 +17,37 @@ export default function Navbar() {
                 <div class="flex-none">
                     <ul class="menu menu-horizontal px-1">
                         <li tabindex="0">
-                            <a>
+                            <a className='btn-ghost'>
                                 Homepage
                                 <MdKeyboardArrowDown />
                             </a>
                             <ul class="p-2 bg-primary-content text-neutral-focus">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 1</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 2</a></li>
                             </ul>
                         </li>
                         <li tabindex="0">
-                            <a>
+                            <a className='btn-ghost'>
                                 Recipe Page
                                 <MdKeyboardArrowDown />
                             </a>
                             <ul class="p-2 bg-primary-content text-neutral-focus">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 1</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 2</a></li>
                             </ul>
                         </li>
                         <li tabindex="0">
-                            <a>
+                            <a className='btn-ghost'>
                                 Pages
                                 <MdKeyboardArrowDown />
                             </a>
                             <ul class="p-2 bg-primary-content text-neutral-focus">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 1</a></li>
+                                <li><a className='btn btn-ghost'>Submenu 2</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a>
+                            <a className='btn-ghost'>
                                 Buy
                             </a>
                         </li>
