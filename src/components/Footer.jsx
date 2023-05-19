@@ -2,7 +2,7 @@ import React from 'react'
 import logo from "../assets/footer logo.png"
 export default function Footer() {
     return (
-        <>
+        <div className='footer_container'>
             <footer class="footer p-10  text-neutral-focus text-base-content">
                 <div >
                     <a href="/" >
@@ -46,6 +46,6 @@ export default function Footer() {
                     </div>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }

@@ -52,20 +52,20 @@ function App() {
   return (
     <div className="App">
 
-      <header className="container m-auto">
+      <header>
         <Navbar />
       </header>
 
 
-      <form class="input-group justify-center pt-28" onSubmit={handelSubmit}>
-        <input type="text" style={{ width: '80%' }} placeholder="Search…" value={search} onInput={handelSearch} class="input input-bordered bg-primary-content border-primary-content" />
+      <form class="input-group justify-center mt-28 pb-7" onSubmit={handelSubmit}>
+        <input type="text" style={{ width: '90%' }} placeholder="Search…" value={search} onInput={handelSearch} class="input input-bordered bg-primary-content border-primary-content" />
         <button class="btn btn-ghost bg-primary-content border-primary-content" type='submit'>
           <FiSearch />
         </button>
       </form>
 
 
-      <div className="container flex justify-center flex-wrap m-auto">
+      <div className="flex gap-11 justify-center flex-wrap m-auto">
         {recipe.map((recipe) => (
           <RecipeCard
             key={recipe.recipe.label}
@@ -77,11 +77,9 @@ function App() {
         ))}
       </div>
 
-      <button class="btn btn-ghost" onClick={handelLoadMore}>Load More</button>
+      <button class="btn btn-ghost my-6" onClick={handelLoadMore}>Load More</button>
 
-      <div class="container m-auto bg-slate-50">
-        <Footer />
-      </div>
+
     </div>
   );
 }

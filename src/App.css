@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  margin-left: 6%;
+  margin-right: 6%;
+}
+.footer_container{
+  margin-left: 6%;
+  margin-right: 6%;
 }
 
 .App-header {
