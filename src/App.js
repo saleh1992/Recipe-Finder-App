@@ -3,17 +3,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar';
 import RecipeCard from './components/RecipeCard';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import CardSkeleton from './components/CardSkeleton';
 
 
 
 function App() {
   const APP_ID = '4a4959e6';
   const APP_KEY = '1a6290d1bc108e4cbbffa06308c7ffd4';
-  const pageNumber = 12;
+  const recipeNumber = 8;
   const [recipe, setRecipe] = useState([]);
   const [search, setSearch] = useState('');
   const [from, setFrom] = useState(0);
-  const [to, setTo] = useState(pageNumber);
+  const [to, setTo] = useState(recipeNumber);
   const [response, setResponse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,11 +30,11 @@ function App() {
     try {
       if (!TO) {
         // Reset load more or pagination in new search
-        TO = pageNumber;
-        setTo(pageNumber);
+        TO = recipeNumber;
+        setTo(recipeNumber);
       }
 
-      const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
+      const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&cuisineType=Eastern&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
       setResponse(response);
       const responseData = response.data.hits;
       console.log("response", response);
@@ -57,12 +60,13 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setRecipe([])
     getRecipes();
   };
 
   const handleLoadMore = () => {
     const newFrom = to;
-    const newTo = to + pageNumber;
+    const newTo = to + recipeNumber;
     setTo(newTo);
     getRecipes(newFrom, newTo);
   };
@@ -70,12 +74,11 @@ function App() {
   return (
     <div className="App">
       <header className="container m-auto pb-28">
-        <Navbar />
+        <Navbar from={from} to={to} totalRecipes={!isLoading && response.data.count} />
       </header>
 
-
-      <div class="text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
-      <form className="flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
+      <div className="container m-auto text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
+      <form className="container m-auto flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
         <input
           type="text"
           style={{ width: '91%' }}
@@ -89,7 +92,8 @@ function App() {
       </form>
 
 
-      <div className="container flex gap-y-11 justify-center md:justify-between  flex-wrap m-auto">
+
+      <div className="container flex gap-11 justify-center flex-wrap m-auto">
         {recipe.map((recipe) => (
           <RecipeCard
             key={recipe.recipe.label}
@@ -99,6 +103,7 @@ function App() {
             calories={recipe.recipe.calories}
           />
         ))}
+        {recipe.length !== to && <CardSkeleton cards={recipeNumber} />}
       </div>
 
       <button className="btn w-44 text-slate-950 btn-outline my-6" onClick={handleLoadMore}>

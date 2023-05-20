@@ -1,16 +1,17 @@
 import React from 'react'
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 export default function RecipeCard({ image, name, calories, cooking_time }) {
     return (
         <>
-            <div class="card w-86 bg-primary-content text-neutral-focus shadow-xl " style={{ 'max-width': '300px' }}>
-                <figure ><img src={image} style={{ width: '300px', height: '300px' }} alt="recipe" /></figure>
-                <div class="card-body justify-between text-left">
-                    <h2 class="card-title">name: {name}</h2>
+            <div className="card w-96 bg-primary-content text-neutral-focus shadow-xl " style={{ maxWidth: '300px' }}>
+                <figure ><img src={image} alt="recipe" /></figure>
+                <div className="card-body justify-between text-left">
+                    <h2 className="card-title">name: {name}</h2>
                     <span >cooking time: {cooking_time} Minutes</span>
                     <span >calories: {(calories).toFixed(2)} </span>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary btn-outline">Add Favorite</button>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary btn-outline">Add Favorite</button>
                     </div>
                 </div>
             </div>
