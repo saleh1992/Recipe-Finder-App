@@ -69,11 +69,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="container m-auto">
+      <header className="container m-auto pb-28">
         <Navbar />
       </header>
 
-      <form className="flex justify-center gap-1 items-center pb-6 pt-28" onSubmit={handleSubmit}>
+
+      <div class="text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
+      <form className="flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
         <input
           type="text"
           style={{ width: '91%' }}
@@ -99,7 +101,7 @@ function App() {
         ))}
       </div>
 
-      <button className="btn btn-ghost my-6" onClick={handleLoadMore}>
+      <button className="btn w-44 text-slate-950 btn-outline my-6" onClick={handleLoadMore}>
         Load More
       </button>
     </div>
