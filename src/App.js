@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar';
 import RecipeCard from './components/RecipeCard';
-import { FiSearch } from 'react-icons/fi';
+
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(pageNumber);
   const [response, setResponse] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     return () => {
@@ -34,9 +34,8 @@ function App() {
       const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
       setResponse(response);
       const responseData = response.data.hits;
-      setLoading(true);
       console.log("response", response);
-
+      setIsLoading(false);
       if (FROM && TO) {
         // Load more recipes
         setRecipe([...recipe, ...responseData]);
@@ -46,7 +45,7 @@ function App() {
       }
     } catch (error) {
       // Handle the error here
-      setLoading(false);
+      setIsLoading(false);
       console.error("Error fetching recipes:", error);
       // Optionally, you can set an error state or show a message to the user
     }
@@ -74,21 +73,21 @@ function App() {
         <Navbar />
       </header>
 
-      <form className="flex justify-center gap-3 items-center pb-6 pt-28" onSubmit={handleSubmit}>
+      <form className="flex justify-center gap-1 items-center pb-6 pt-28" onSubmit={handleSubmit}>
         <input
           type="text"
-          style={{ width: '85%' }}
+          style={{ width: '91%' }}
           placeholder="Search…"
           value={search}
           onInput={handleSearch}
           className="input bg-primary-content "
         />
-        <span className='flex bg-primary-content'>({loading ? response.data.count : null} recipes)</span>
+        <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
 
       </form>
 
 
-      <div className="container gap-11 flex justify-center flex-wrap m-auto">
+      <div className="container flex gap-y-11 justify-center md:justify-between  flex-wrap m-auto">
         {recipe.map((recipe) => (
           <RecipeCard
             key={recipe.recipe.label}
