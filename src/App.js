@@ -65,6 +65,7 @@ function App() {
   };
 
   const handleLoadMore = () => {
+    setIsLoading(true);
     const newFrom = to;
     const newTo = to + recipeNumber;
     setTo(newTo);
@@ -103,10 +104,10 @@ function App() {
             calories={recipe.recipe.calories}
           />
         ))}
-        {recipe.length !== to && <CardSkeleton cards={recipeNumber} />}
+        {isLoading && <CardSkeleton cards={recipeNumber} />}
       </div>
 
-      <button className="btn w-44 text-slate-950 btn-outline my-6" onClick={handleLoadMore}>
+      <button className="btn w-44 text-slate-950 btn-outline my-6" disabled={!isLoading && !response.data.more} onClick={handleLoadMore}>
         Load More
       </button>
     </div>
