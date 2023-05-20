@@ -6,6 +6,7 @@ import RecipeCard from './components/RecipeCard';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import CardSkeleton from './components/CardSkeleton';
+import { HiFilter } from 'react-icons/hi';
 
 
 
@@ -19,6 +20,7 @@ function App() {
   const [to, setTo] = useState(recipeNumber);
   const [response, setResponse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedValue, setSelectedValue] = useState('');
 
   useEffect(() => {
     return () => {
@@ -34,7 +36,7 @@ function App() {
         setTo(recipeNumber);
       }
 
-      const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&cuisineType=Eastern&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
+      const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
       setResponse(response);
       const responseData = response.data.hits;
       console.log("response", response);
@@ -72,6 +74,15 @@ function App() {
     getRecipes(newFrom, newTo);
   };
 
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedValue(value);
+    } else {
+      setSelectedValue('');
+    }
+  };
+
   return (
     <div className="App">
       <header className="container m-auto pb-28">
@@ -91,6 +102,131 @@ function App() {
         <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
 
       </form>
+      {selectedValue}
+      <div className="collapse">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">
+          <HiFilter size={25} />
+        </div>
+        <div className="collapse-content flex gap-x-44 justify-start capitalize ">
+          {/* Diet filter */}
+          <div className='flex flex-col'>
+            <label className="label cursor-pointer justify-start gap-2">
+              <span className="font-medium text-zinc-950 text-lg">Diet</span>
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Balanced</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="balanced"
+                onChange={handleCheckboxChange}
+                checked={selectedValue === 'balanced'}
+              />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">High-Fiber</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">High-Protein</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Low-Carb</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Low-Fat</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Low-Sodium</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+          </div>
+          {/* Meal Types */}
+          <div className='flex flex-col'>
+            <label className="label cursor-pointer justify-start gap-2">
+              <span className="font-medium text-zinc-950 text-lg">Meal Types</span>
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Breakfast</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Brunch</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Lunch/Dinner</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Snack</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">Teatime</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+          </div>
+          {/* Cuisine Types */}
+          <div className='flex flex-col'>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="font-medium text-zinc-950 text-lg">Cuisine Types</span>
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">american</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">asian</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">chinese</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">french</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">indian</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">world</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+          </div>
+          {/* Dish Types */}
+          <div className='flex flex-col '>
+            <label className="label cursor-pointer justify-start gap-2">
+              <span className="font-medium text-zinc-950 text-lg">Dish Types</span>
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">pizza</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">pasta</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">ice cream</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+            <label className="label cursor-pointer justify-between gap-2">
+              <span className="label-text">sweets</span>
+              <input type="checkbox" className="checkbox checkbox-accent" />
+            </label>
+          </div>
+
+        </div>
+
+      </div>
 
 
 
