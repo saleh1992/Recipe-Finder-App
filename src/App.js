@@ -13,7 +13,7 @@ import { HiFilter } from 'react-icons/hi';
 function App() {
   const APP_ID = '4a4959e6';
   const APP_KEY = '1a6290d1bc108e4cbbffa06308c7ffd4';
-  const recipeNumber = 8;
+  let recipeNumber = 8;
   let param_key = '';
   let param_value = '';
   const [recipe, setRecipe] = useState([]);
@@ -44,13 +44,9 @@ function App() {
       searchParams.set('app_key', APP_KEY);
       searchParams.set('from', FROM || from);
       searchParams.set('to', TO || to);
-      searchParams.set([param_key], param_value);
-
+      searchParams.set([param_key], [param_value]);
       const response = await axios.get(`https://api.edamam.com/search?${searchParams.toString()}`);
 
-
-
-      // const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
 
       setResponse(response);
       const responseData = response.data.hits;
@@ -93,6 +89,8 @@ function App() {
     const { value, checked } = event.target;
 
     if (checked) {
+      setRecipe([])
+      setIsLoading(true);
       setSelectedValue(value);
       param_key = event.target.attributes.param.textContent
       param_value = value
@@ -121,7 +119,7 @@ function App() {
         <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
 
       </form>
-      {selectedValue}
+
       <div className="collapse container m-auto">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">
@@ -207,23 +205,58 @@ function App() {
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Breakfast</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="breakfast"
+                onChange={handleCheckboxChange}
+                param='mealType'
+                checked={selectedValue === 'breakfast'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Brunch</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="brunch"
+                onChange={handleCheckboxChange}
+                param='mealType'
+                checked={selectedValue === 'brunch'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Lunch/Dinner</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="lunch"
+                onChange={handleCheckboxChange}
+                param='mealType'
+                checked={selectedValue === 'lunch-dinner'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Snack</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="snack"
+                onChange={handleCheckboxChange}
+                param='mealType'
+                checked={selectedValue === 'snack'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Teatime</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="teatime"
+                onChange={handleCheckboxChange}
+                param='mealType'
+                checked={selectedValue === 'teatime'}
+              />
             </label>
           </div>
           {/* Cuisine Types */}
@@ -232,28 +265,70 @@ function App() {
               <span className="font-medium text-zinc-950 text-lg">Cuisine Types</span>
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">american</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">American</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="american"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('american')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">asian</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">Asian</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="asian"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('asian')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">chinese</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">Chinese</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="chinese"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('chinese')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">french</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">French</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="french"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('french')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">indian</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">Indian</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="indian"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('indian')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">world</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">World</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="world"
+                onChange={handleCheckboxChange}
+                param='cuisineType'
+                checked={selectedValue.includes('world')}
+              />
             </label>
           </div>
           {/* Dish Types */}
@@ -262,20 +337,48 @@ function App() {
               <span className="font-medium text-zinc-950 text-lg">Dish Types</span>
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">pizza</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">egg</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="egg"
+                onChange={handleCheckboxChange}
+                param='dishType'
+                checked={selectedValue.includes('egg')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">pasta</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">bread</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="bread"
+                onChange={handleCheckboxChange}
+                param='dishType'
+                checked={selectedValue.includes('bread')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">ice cream</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">desserts</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="desserts"
+                onChange={handleCheckboxChange}
+                param='dishType'
+                checked={selectedValue.includes('desserts')}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
-              <span className="label-text">sweets</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <span className="label-text">drinks</span>
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="drinks"
+                onChange={handleCheckboxChange}
+                param='dishType'
+                checked={selectedValue.includes('drinks')}
+              />
             </label>
           </div>
 
