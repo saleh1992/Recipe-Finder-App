@@ -74,6 +74,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setRecipe([])
+    setIsLoading(true);
     getRecipes();
   };
 
@@ -120,11 +121,9 @@ function App() {
         <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
       </form>
 
-      <div className="collapse container m-auto">
-        <input type="checkbox" id='filter' />
-        <div className="collapse-title text-xl font-medium">
-        </div>
-        <div className="collapse-content flex gap-x-44 gap-y-10 flex-wrap justify-center md:justify-start capitalize ">
+      <div className="collapse container m-auto mb-7">
+        <input type="checkbox" id='filter' hidden />
+        <div className="collapse-content flex gap-x-44 gap-y-10 flex-wrap justify-center bg-gray-50 rounded-2xl capitalize ">
           {/* Diet filter */}
           <div className='flex flex-col'>
             <label className="label cursor-pointer justify-start gap-2">
