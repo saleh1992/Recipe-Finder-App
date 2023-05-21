@@ -116,16 +116,15 @@ function App() {
           onInput={handleSearch}
           className="input bg-primary-content "
         />
+        <label className='cursor-pointer' for="filter"> <HiFilter size={25} /></label>
         <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
-
       </form>
 
       <div className="collapse container m-auto">
-        <input type="checkbox" />
+        <input type="checkbox" id='filter' />
         <div className="collapse-title text-xl font-medium">
-          <HiFilter size={25} />
         </div>
-        <div className="collapse-content flex gap-x-44 justify-start capitalize ">
+        <div className="collapse-content flex gap-x-44 gap-y-10 flex-wrap justify-center md:justify-start capitalize ">
           {/* Diet filter */}
           <div className='flex flex-col'>
             <label className="label cursor-pointer justify-start gap-2">
