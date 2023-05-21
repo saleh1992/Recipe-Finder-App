@@ -10,9 +10,6 @@ export default function RecipeCard({ image, name, calories, cooking_time }) {
                     <h2 className="card-title">name: {name}</h2>
                     <span >cooking time: {cooking_time} Minutes</span>
                     <span >calories: {(calories).toFixed(2)} </span>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary btn-outline">Add Favorite</button>
-                    </div>
                 </div>
             </div>
         </>
