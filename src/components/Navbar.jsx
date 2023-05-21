@@ -14,6 +14,7 @@ export default function Navbar({ from, to, totalRecipes }) {
                     </a>
                 </div>
 
+                {/* for mobile screen devices */}
                 <div className="md:hidden md:order-2 ">
                     <div className="dropdown dropdown-bottom ">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -60,10 +61,11 @@ export default function Navbar({ from, to, totalRecipes }) {
                     </div>
                 </div>
 
-                <div className="hidden md:block  order-2">
+                {/* for large screen devices */}
+                <div className="hidden md:block order-2">
                     <ul className="menu menu-horizontal px-1">
                         <li tabIndex="0">
-                            <a className='btn-ghost'>
+                            <a className='btn-ghost font-semibold'>
                                 Homepage
                                 <MdKeyboardArrowDown />
                             </a>
@@ -73,7 +75,7 @@ export default function Navbar({ from, to, totalRecipes }) {
                             </ul>
                         </li>
                         <li tabIndex="0">
-                            <a className='btn-ghost'>
+                            <a className='btn-ghost font-semibold'>
                                 Recipe Page
                                 <MdKeyboardArrowDown />
                             </a>
@@ -83,7 +85,7 @@ export default function Navbar({ from, to, totalRecipes }) {
                             </ul>
                         </li>
                         <li tabIndex="0">
-                            <a className='btn-ghost'>
+                            <a className='btn-ghost font-semibold'>
                                 Pages
                                 <MdKeyboardArrowDown />
                             </a>
@@ -94,7 +96,7 @@ export default function Navbar({ from, to, totalRecipes }) {
                             </ul>
                         </li>
                         <li>
-                            <a className='btn-ghost' >
+                            <a className='btn-ghost font-semibold' >
                                 Buy
                             </a>
                         </li>
@@ -103,8 +105,9 @@ export default function Navbar({ from, to, totalRecipes }) {
                 </div>
 
                 <div className='order-3'>
-                    <FiSearch size={30} />
-
+                    <div className='hidden md:block'>
+                        <FiSearch size={30} />
+                    </div>
                     <div className="avatar online mx-7">
                         <div className="w-8  rounded-full">
                             <img src={avatar} alt='avatar' />

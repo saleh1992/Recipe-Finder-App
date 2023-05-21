@@ -108,11 +108,11 @@ function App() {
         <Navbar from={from} to={to} totalRecipes={!isLoading && response.data.count} />
       </header>
 
-      <div className="container m-auto text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
+      <div className="container m-auto text-center md:text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
       <form className="container m-auto flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
         <input
           type="text"
-          style={{ width: '91%' }}
+          style={{ width: 'calc(100% - 131px)' }}
           placeholder="Search…"
           value={search}
           onInput={handleSearch}
