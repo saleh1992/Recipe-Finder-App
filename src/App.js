@@ -51,7 +51,8 @@ function App() {
       setResponse(response);
       const responseData = response.data.hits;
       console.log("response", response);
-      setIsLoading(false);
+      setIsLoading(false)
+      // setTimeout(() => setIsLoading(false), 1)
       if (FROM && TO) {
         // Load more recipes
         setRecipe([...recipe, ...responseData]);
@@ -117,7 +118,7 @@ function App() {
           onInput={handleSearch}
           className="input bg-primary-content "
         />
-        <label className='cursor-pointer' for="filter"> <HiFilter size={25} /></label>
+        <label className='cursor-pointer' htmlFor="filter"> <HiFilter size={25} /></label>
         <span className='flex bg-primary-content'>({!isLoading && response.data.count} Recipes)</span>
       </form>
 
@@ -395,7 +396,8 @@ function App() {
             cooking_time={recipe.recipe.totalTime}
             calories={recipe.recipe.calories}
           />
-        ))}
+        ))
+        }
         {isLoading && <CardSkeleton cards={recipeNumber} />}
       </div>
 
