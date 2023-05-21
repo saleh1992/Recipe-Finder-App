@@ -14,6 +14,8 @@ function App() {
   const APP_ID = '4a4959e6';
   const APP_KEY = '1a6290d1bc108e4cbbffa06308c7ffd4';
   const recipeNumber = 8;
+  let param_key = '';
+  let param_value = '';
   const [recipe, setRecipe] = useState([]);
   const [search, setSearch] = useState('');
   const [from, setFrom] = useState(0);
@@ -35,8 +37,21 @@ function App() {
         TO = recipeNumber;
         setTo(recipeNumber);
       }
+      const paramsString = "";
+      const searchParams = new URLSearchParams(paramsString);
+      searchParams.set('q', search || 'meet');
+      searchParams.set('app_id', APP_ID);
+      searchParams.set('app_key', APP_KEY);
+      searchParams.set('from', FROM || from);
+      searchParams.set('to', TO || to);
+      searchParams.set([param_key], param_value);
 
-      const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
+      const response = await axios.get(`https://api.edamam.com/search?${searchParams.toString()}`);
+
+
+
+      // const response = await axios.get(`https://api.edamam.com/search?q=${search || 'meet'}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${FROM || from}&to=${TO || to}`);
+
       setResponse(response);
       const responseData = response.data.hits;
       console.log("response", response);
@@ -76,8 +91,12 @@ function App() {
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
+
     if (checked) {
       setSelectedValue(value);
+      param_key = event.target.attributes.param.textContent
+      param_value = value
+      getRecipes();
     } else {
       setSelectedValue('');
     }
@@ -103,7 +122,7 @@ function App() {
 
       </form>
       {selectedValue}
-      <div className="collapse">
+      <div className="collapse container m-auto">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">
           <HiFilter size={25} />
@@ -121,28 +140,64 @@ function App() {
                 className="checkbox checkbox-accent"
                 value="balanced"
                 onChange={handleCheckboxChange}
+                param='diet'
                 checked={selectedValue === 'balanced'}
               />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">High-Fiber</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="high-fiber"
+                onChange={handleCheckboxChange}
+                param='diet'
+                checked={selectedValue === 'high-fiber'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">High-Protein</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="high-protein"
+                onChange={handleCheckboxChange}
+                param='diet'
+                checked={selectedValue === 'high-protein'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Low-Carb</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="low-carb"
+                onChange={handleCheckboxChange}
+                param='diet'
+                checked={selectedValue === 'low-carb'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Low-Fat</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="low-fat"
+                onChange={handleCheckboxChange}
+                param='diet'
+                checked={selectedValue === 'low-fat'}
+              />
             </label>
             <label className="label cursor-pointer justify-between gap-2">
               <span className="label-text">Low-Sodium</span>
-              <input type="checkbox" className="checkbox checkbox-accent" />
+              <input
+                type="checkbox"
+                className="checkbox checkbox-accent"
+                value="low-sodium"
+                onChange={handleCheckboxChange}
+                param='diet'
+                checked={selectedValue === 'low-sodium'}
+              />
             </label>
           </div>
           {/* Meal Types */}
