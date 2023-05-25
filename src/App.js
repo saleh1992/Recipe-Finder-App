@@ -26,9 +26,9 @@ function App() {
   const [selectedValue, setSelectedValue] = useState('');
 
   useEffect(() => {
-    return () => {
-      getRecipes();
-    }
+    // return () => {
+    // }
+    getRecipes();
   }, []);
 
   const getRecipes = async (FROM, TO) => {
@@ -111,7 +111,7 @@ function App() {
       <header className="container m-auto pb-28">
         <Navbar from={from} to={to} totalRecipes={!isLoading && response.data.count} />
       </header>
-sasa
+
       <div className="container m-auto text-center md:text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
       <form className="container m-auto flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
         <input
