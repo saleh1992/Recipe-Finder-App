@@ -47,12 +47,12 @@ function App() {
       searchParams.set('to', TO || to);
       searchParams.set([param_key], [param_value]);
       const response = await axios.get(`https://api.edamam.com/search?${searchParams.toString()}`);
+      setIsLoading(false)
 
 
       setResponse(response);
       const responseData = response.data.hits;
       console.log("response", response);
-      setIsLoading(false)
       // setTimeout(() => setIsLoading(false), 1)
       if (FROM && TO) {
         // Load more recipes
@@ -111,7 +111,7 @@ function App() {
       <header className="container m-auto pb-28">
         <Navbar from={from} to={to} totalRecipes={!isLoading && response.data.count} />
       </header>
-
+sasa
       <div className="container m-auto text-center md:text-left text-zinc-950 text-4xl font-serif p-4 font-bold" >Search results</div>
       <form className="container m-auto flex justify-center gap-1 items-center pb-6 " onSubmit={handleSubmit}>
         <input
