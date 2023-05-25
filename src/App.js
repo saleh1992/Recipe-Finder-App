@@ -26,8 +26,6 @@ function App() {
   const [selectedValue, setSelectedValue] = useState('');
 
   useEffect(() => {
-    // return () => {
-    // }
     getRecipes();
   }, []);
 
@@ -48,12 +46,9 @@ function App() {
       searchParams.set([param_key], [param_value]);
       const response = await axios.get(`https://api.edamam.com/search?${searchParams.toString()}`);
       setIsLoading(false)
-
-
       setResponse(response);
       const responseData = response.data.hits;
-      console.log("response", response);
-      // setTimeout(() => setIsLoading(false), 1)
+
       if (FROM && TO) {
         // Load more recipes
         setRecipe([...recipe, ...responseData]);
